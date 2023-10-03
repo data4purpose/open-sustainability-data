@@ -10,8 +10,11 @@
 
     <properties>
         <DATA_REPO_001>file://$(pwd)/../IoS-Case-Study/DATA_REPO_001</DATA_REPO_001>
+        <DATA_REPO_002>https://kamir.solidcommunity.net/public/ecolytiq-sustainability-profile</DATA_REPO_002>
         <DIST_WAYANG_HOME>/Users/kamir/GITHUB.private/incubator-wayang/wayang-assembly/target/apache-wayang-assembly-0.7.1-SNAPSHOT-incubating-dist/wayang-0.7.1-SNAPSHOT</DIST_WAYANG_HOME>
         <WAYANG_VERSION>0.7.1</WAYANG_VERSION>
+
+        <spark.version>3.5.0</spark.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
 
@@ -40,11 +43,38 @@
             <artifactId>wayang-spark_2.12</artifactId>
             <version>${WAYANG_VERSION}</version>
         </dependency>
+
+
         <dependency>
             <groupId>org.apache.wayang</groupId>
             <artifactId>wayang-api-scala-java_2.12</artifactId>
             <version>${WAYANG_VERSION}</version>
+            <scope>system</scope>
+            <systemPath>/Users/kamir/GITHUB.private/incubator-wayang/wayang-assembly/target/apache-wayang-assembly-0.7.1-SNAPSHOT-incubating-dist/wayang-0.7.1-SNAPSHOT/jars/wayang-api-scala-java_2.12-0.7.1-SNAPSHOT.jar</systemPath>
         </dependency>
+        <!--dependency>
+            <groupId>org.apache.wayang</groupId>
+            <artifactId>wayang-api-scala-java_2.12</artifactId>
+            <version>${WAYANG_VERSION}</version>
+        </dependency-->
+
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_2.12</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>2.12.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.13</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -73,9 +103,10 @@
                             <executable>${DIST_WAYANG_HOME}/bin/wayang-submit</executable>
                             <!-- Optionally, provide arguments to the command -->
                             <arguments>
-                                <argument>WordCount</argument>
+                                <argument>RemoteFileWordCount</argument>
                                 <argument>java</argument>
                                 <argument>${DATA_REPO_001}/README.md</argument>
+                                <!--argument>${DATA_REPO_002}/profile2.ttl</argument-->
                             </arguments>
                         </configuration>
                     </execution>

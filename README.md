@@ -21,3 +21,9 @@ more datastructures, which should be shared in the future.
 
 This drives another activity: Building a data sharing infrastructure. This can be internally, within organizations,
 across partners, e.g., in research projects, supply chains or large colaboration projects, and later, eventually on a global scale.
+
+# Example 1: Local data
+
+
+# Example 2: Public Data inside a DataPod
+https://kamir.solidcommunity.net/public/ecolytiq-sustainability-profile/profile2.ttl
