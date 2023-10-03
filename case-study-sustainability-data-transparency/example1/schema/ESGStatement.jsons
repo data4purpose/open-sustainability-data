@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "timestamp": {
+      "type": "integer"
+    },
+    "companyName": {
+      "type": "string"
+    },
+    "domain": {
+      "type": "string"
+    },
+    "registrationNumber": {
+      "type": "string"
+    },
+    "currentAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "No Poverty",
+            "Zero Hunger",
+            "Good Health and Well-being",
+            "Quality Education",
+            "Gender Equality",
+            "Clean Water and Sanitation",
+            "Affordable and Clean Energy",
+            "Decent Work and Economic Growth",
+            "Industry, Innovation, and Infrastructure",
+            "Reduced Inequalities",
+            "Sustainable Cities and Communities",
+            "Responsible Consumption and Production",
+            "Climate Action",
+            "Life Below Water",
+            "Life on Land",
+            "Peace, Justice, and Strong Institutions",
+            "Partnerships for the Goals"
+          ]
+        }
+      }
+    },
+    "targetValuesNextYear": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "No Poverty",
+            "Zero Hunger",
+            "Good Health and Well-being",
+            "Quality Education",
+            "Gender Equality",
+            "Clean Water and Sanitation",
+            "Affordable and Clean Energy",
+            "Decent Work and Economic Growth",
+            "Industry, Innovation, and Infrastructure",
+            "Reduced Inequalities",
+            "Sustainable Cities and Communities",
+            "Responsible Consumption and Production",
+            "Climate Action",
+            "Life Below Water",
+            "Life on Land",
+            "Peace, Justice, and Strong Institutions",
+            "Partnerships for the Goals"
+          ]
+        }
+      }
+    }
+  },
+  "required": ["timestamp", "companyName", "domain", "registrationNumber", "currentAssessment", "targetValuesNextYear"]
+}
