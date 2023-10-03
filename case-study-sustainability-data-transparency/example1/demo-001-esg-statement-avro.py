@@ -6,30 +6,30 @@ from avro.io import DatumReader
 
 demoFilename="random_esg_statement.avro"
 
-esg_goals = [ "No Poverty",
-"Zero Hunger",
-"Good Health and Well-being",
-"Quality Education",
-"Gender Equality",
-"Clean Water and Sanitation",
-"Affordable and Clean Energy",
-"Decent Work and Economic Growth",
-"Industry, Innovation, and Infrastructure",
-"Reduced Inequalities",
-"Sustainable Cities and Communities",
-"Responsible Consumption and Production",
-"Climate Action",
-"Life Below Water",
-"Life on Land",
-"Peace, Justice, and Strong Institutions",
-"Partnerships for the Goals"
-]
+esg_goals = [   "No Poverty",
+                "Zero Hunger",
+                "Good Health and Well-being",
+                "Quality Education",
+                "Gender Equality",
+                "Clean Water and Sanitation",
+                "Affordable and Clean Energy",
+                "Decent Work and Economic Growth",
+                "Industry, Innovation, and Infrastructure",
+                "Reduced Inequalities",
+                "Sustainable Cities and Communities",
+                "Responsible Consumption and Production",
+                "Climate Action",
+                "Life Below Water",
+                "Life on Land",
+                "Peace, Justice, and Strong Institutions",
+                "Partnerships for the Goals"
+            ]
 
 # Define the Avro schema
 avro_schema = schema.parse('''
 {
   "type": "record",
-  "name": "CompanyESGData",
+  "name": "ESGStatement",
   "fields": [
     {"name": "timestamp", "type": "long"},
     {"name": "companyName", "type": "string"},
