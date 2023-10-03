@@ -4,16 +4,16 @@ import org.apache.wayang.core.api.Configuration;
 import org.apache.wayang.core.api.WayangContext;
 import org.apache.wayang.core.optimizer.cardinality.DefaultCardinalityEstimator;
 import org.apache.wayang.java.Java;
-import org.apache.wayang.spark.Spark;
-import java.util.Collection;
-import java.util.Arrays;
 
-public class WordCount {
+import java.util.Arrays;
+import java.util.Collection;
+
+public class RemoteFileWordCount {
 
     public static void main(String[] args){
 
         System.out.println( ">>> Apache Wayang Test #01");
-        System.out.println( "    We use a local file and a 'Java Context'.");
+        System.out.println( "    We use a remote file and a 'Java Context'.");
         int i = 0;
         for (String arg : args) {
             String line = String.format( "  %d    - %s", i,arg);
@@ -30,12 +30,12 @@ public class WordCount {
         //        .withPlugin(Spark.basicPlugin());
         JavaPlanBuilder planBuilder = new JavaPlanBuilder(wayangContext)
                 .withJobName(String.format("WordCount (%s)", inputUrl))
-                .withUdfJarOf(WordCount.class);
+                .withUdfJarOf(RemoteFileWordCount.class);
 
         // Start building the WayangPlan.
         Collection<Tuple2<String, Integer>> wordcounts = planBuilder
                 // Read the text file.
-                .readTextFile(inputUrl).withName("Load file")
+                .readRemoteTextFile(inputUrl).withName("Load file")
 
                 // Split each line by non-word characters.
                 .flatMap(line -> Arrays.asList(line.split("\\W+")))
@@ -62,6 +62,6 @@ public class WordCount {
                 .collect();
 
         System.out.println(wordcounts);
-        System.out.println( "*** Done. ***" );
+        System.out.println( "### Done. ###" );
     }
 }

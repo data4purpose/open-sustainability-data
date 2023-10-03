@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="wayang-test-01" target="15" />
+      <module name="wayang-test-01" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
