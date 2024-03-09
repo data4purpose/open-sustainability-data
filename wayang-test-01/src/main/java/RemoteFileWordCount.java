@@ -35,7 +35,7 @@ public class RemoteFileWordCount {
         // Start building the WayangPlan.
         Collection<Tuple2<String, Integer>> wordcounts = planBuilder
                 // Read the text file.
-                .readRemoteTextFile(inputUrl).withName("Load file")
+                .readTextFile(inputUrl).withName("Load file")
 
                 // Split each line by non-word characters.
                 .flatMap(line -> Arrays.asList(line.split("\\W+")))

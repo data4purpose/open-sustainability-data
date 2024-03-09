@@ -27,3 +27,17 @@ across partners, e.g., in research projects, supply chains or large colaboration
 
 # Example 2: Public Data inside a DataPod
 https://kamir.solidcommunity.net/public/ecolytiq-sustainability-profile/profile2.ttl
+
+
+== Titel-Vorschläge:
+=== Topic 1: Apache Wayang - Data Federation for Sustainability Research Collaboration
+- How data federation drives global research?
+- How data federation drives research in a global context?
+- Research for a global problem: How data federation boost collaboration?
+
+=== Topic 2: Event Streaming for sustainability research
+- Data streaming for a globally distributed platform: How event streaming drives the sustainability platform.
+
+
+How can we measure how much CO2 has been avoided?
+How can we see which behaviour change happened (a) on an individual level (b) on a group level?
