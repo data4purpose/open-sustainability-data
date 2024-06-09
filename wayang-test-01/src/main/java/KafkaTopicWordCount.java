@@ -11,7 +11,15 @@ import org.apache.wayang.java.Java;
 import java.util.Arrays;
 import java.util.Collection;
 
+// Import the Logger class
+import org.apache.log4j.Logger;
+
+
 public class KafkaTopicWordCount {
+
+
+    // Create a logger instance
+    private static final Logger logger = Logger.getLogger(KafkaTopicWordCount.class);
 
     // Define the lambda function for formatting the output
     private static final FunctionDescriptor.SerializableFunction<Tuple2<String, Integer>, String> udf = tuple -> {
@@ -22,6 +30,8 @@ public class KafkaTopicWordCount {
 
         System.out.println( ">>> Apache Wayang Test #01");
         System.out.println( "    We use a Kafka topic and a 'Java Context'.");
+        logger.debug("GO: debugging...");
+        logger.warn("GO: warning...");
 
         // Default topic name
         String topicName = "banking-tx-small-csv";

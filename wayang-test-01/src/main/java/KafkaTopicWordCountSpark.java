@@ -1,4 +1,7 @@
+import org.apache.wayang.api.DataQuantaBuilder;
+import org.apache.wayang.api.FilterDataQuantaBuilder;
 import org.apache.wayang.api.JavaPlanBuilder;
+import org.apache.wayang.api.ReduceByDataQuantaBuilder;
 import org.apache.wayang.basic.data.Tuple2;
 import org.apache.wayang.core.api.Configuration;
 import org.apache.wayang.core.api.WayangContext;
@@ -8,9 +11,13 @@ import org.apache.wayang.core.optimizer.costs.LoadProfileEstimators;
 import org.apache.wayang.java.Java;
 import org.apache.wayang.spark.Spark;
 
+import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Collection;
 
-public class KafkaTopicWordCountSpark {
+public class KafkaTopicWordCountSpark implements Serializable {
+
+    public KafkaTopicWordCountSpark() {}
 
     // Define the lambda function for formatting the output
     private static final FunctionDescriptor.SerializableFunction<Tuple2<String, Integer>, String> udf = tuple -> {
@@ -47,12 +54,14 @@ public class KafkaTopicWordCountSpark {
                 .withPlugin(Spark.basicPlugin());
 
         JavaPlanBuilder planBuilder = new JavaPlanBuilder(wayangContext)
-                .withJobName(String.format("WordCount via Spark on topic (%s)", topicName))
+                .withJobName(String.format("WordCount via Spark on Kafka topic (%s)", topicName))
                 .withUdfJarOf(KafkaTopicWordCountSpark.class);
 
         // Start building the WayangPlan.
+        //Collection<Tuple2<String, Integer>> wordcounts_collection =
+
         planBuilder
-                // Read the text file.
+                // Read the records from a Kafka topic.
                 .readKafkaTopic(topicName).withName("Load-data-from-topic")
 
                 // Split each line by non-word characters.
@@ -64,7 +73,6 @@ public class KafkaTopicWordCountSpark {
                 .filter(token -> !token.isEmpty())
                 .withSelectivity(0.99, 0.99, 0.99)
                 .withName("Filter empty words")
-
                 // Attach counter to each word.
                 .map(word -> new Tuple2<>(word.toLowerCase(), 1)).withName("To-lower-case, add-counter")
 
@@ -75,15 +83,18 @@ public class KafkaTopicWordCountSpark {
                 )
                 .withCardinalityEstimator(new DefaultCardinalityEstimator(0.9, 1, false, in -> Math.round(0.01 * in[0])))
                 .withName("Add counters")
-                .collect();
+                // .collect();
 
                 // Execute the plan and store the results in Kafka.
                 //.writeKafkaTopic("file:///Users/mkaempf/GITHUB.private/open-sustainability-data/bin/test_23456789.txt", d -> String.format("%.2f, %d", d.getField1(), d.getField0()), "job_test_1",
-                //.writeKafkaTopic("test_23456", d -> String.format("%d, %s", d.getField1(), d.getField0()), "job_test_1",
+                .writeKafkaTopic("test_23456", d -> Util.formatData( d.getField0(), d.getField1() ), "job_test_2",
                         LoadProfileEstimators.createFromSpecification("wayang.java.kafkatopicsink.load", configuration) );
-
+//
+        //System.out.println(  wordcounts_collection );
 
     }
 
 
 }
+
+

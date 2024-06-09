@@ -1,0 +1,33 @@
+{
+  "generators": [
+    {
+      "topic": "transactions_02",
+      "key": {
+        "_gen": "uuid"
+      },
+      "value": {
+        "price": {
+          "_gen": "uniformDistribution",
+          "bounds": [
+            1,
+            50
+          ],
+          "decimals": 2
+        },
+        "timestamp": {
+          "_gen": "now"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "dev-kafka": {
+      "kind": "kafka",
+      "producerConfigs": {
+        "bootstrap.servers": "192.168.0.201:9092",
+        "key.serializer": "io.shadowtraffic.kafka.serdes.JsonSerializer",
+        "value.serializer": "io.shadowtraffic.kafka.serdes.JsonSerializer"
+      }
+    }
+  }
+}
